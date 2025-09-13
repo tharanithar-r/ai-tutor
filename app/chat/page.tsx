@@ -3,12 +3,9 @@
 import { useEffect, useState } from "react";
 import ChatInterface from "../components/ChatInterface";
 import { Badge } from "@/components/ui/badge";
-import {
-  Target,
-  Bot,
-} from "lucide-react";
+import { Target, Bot } from "lucide-react";
 import { getAuthToken } from "@/lib/cookies";
-import ProtectedRoute from '../components/ProtectedRoute';
+import ProtectedRoute from "../components/ProtectedRoute";
 import {
   Select,
   SelectContent,
@@ -70,38 +67,42 @@ export default function ChatPage() {
   return (
     <ProtectedRoute>
       {() => (
-        <div className="flex flex-col h-screen p-6">
+        <div className='flex flex-col h-screen  pt-16 md:pt-5 px-4 md:px-6'>
           {/* Goal Selection Header */}
-          <div className="mb-6 flex-shrink-0">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Bot className="h-6 w-6 text-blue-600" />
+          <div className='mb-6 flex-shrink-0'>
+            <div className='flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0'>
+              <div className='flex items-center space-x-3'>
+                <div className='p-2 bg-blue-100 rounded-lg'>
+                  <Bot className='h-6 w-6 text-blue-600' />
                 </div>
                 <div>
-                  <h1 className="text-xl font-semibold text-gray-900">AI Tutor</h1>
-                  <p className="text-sm text-gray-500">Your personalized learning assistant</p>
+                  <h1 className='text-xl font-semibold text-gray-900'>
+                    AI Tutor
+                  </h1>
+                  <p className='text-sm text-gray-500'>
+                    Your personalized learning assistant
+                  </p>
                 </div>
               </div>
-              
+
               {/* Goal Selection */}
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <Target className="h-4 w-4 text-gray-500" />
-                  <span className="text-sm text-gray-600">Current Goal:</span>
+              <div className='flex items-center space-x-4 flex-shrink-0'>
+                <div className='flex items-center space-x-2'>
+                  <Target className='h-4 w-4 text-gray-500' />
+                  <span className='text-sm text-gray-600'>Current Goal:</span>
                 </div>
                 <Select value={selectedGoal} onValueChange={setSelectedGoal}>
-                  <SelectTrigger className="w-64">
-                    <SelectValue placeholder="Select a learning goal" />
+                  <SelectTrigger className='w-64'>
+                    <SelectValue placeholder='Select a learning goal' />
                   </SelectTrigger>
                   <SelectContent>
                     {goals.map((goal) => (
                       <SelectItem key={goal.id} value={goal.id.toString()}>
-                        <div className="flex items-center space-x-2">
-                          <Badge variant="outline" className="text-xs">
+                        <div className='flex items-center space-x-2'>
+                          <Badge variant='outline' className='text-xs'>
                             {goal.category}
                           </Badge>
-                          <span className="truncate">{goal.title}</span>
+                          <span className='truncate'>{goal.title}</span>
                         </div>
                       </SelectItem>
                     ))}
@@ -112,10 +113,10 @@ export default function ChatPage() {
           </div>
 
           {/* Chat Interface */}
-          <div className="flex-1 min-h-0">
-            <ChatInterface 
+          <div className='flex-1 min-h-0'>
+            <ChatInterface
               goalId={selectedGoal ? parseInt(selectedGoal) : undefined}
-              className="h-full"
+              className='h-full'
             />
           </div>
         </div>

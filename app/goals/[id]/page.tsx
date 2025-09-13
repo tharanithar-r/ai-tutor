@@ -270,8 +270,8 @@ export default function GoalDetailPage() {
     totalMilestones > 0 ? (completedMilestones / totalMilestones) * 100 : 0;
 
   return (
-    <div className='min-h-screen bg-gray-50 py-8'>
-      <div className='max-w-4xl mx-auto px-4 space-y-6'>
+    <div className='min-h-screen bg-gray-50 py-8  pt-16 md:pt-5'>
+      <div className='max-w-4xl mx-auto px-4 md:px-4 space-y-6'>
         {/* Header */}
         <div className='flex items-center justify-between'>
           <Button variant='ghost' asChild>

@@ -23,18 +23,11 @@ export function deleteCookie(name: string) {
 }
 
 export function setAuthToken(token: string) {
-  console.log("setAuthToken: Setting token:", `${token.substring(0, 30)}...`);
   setCookie("auth_token", token, 7);
-  console.log("setAuthToken: Token set, verifying:", !!getCookie("auth_token"));
 }
 
 export function getAuthToken(): string | null {
   const token = getCookie("auth_token");
-  console.log("getAuthToken: Retrieved token:", !!token);
-  console.log("getAuthToken: All cookies:", document.cookie);
-  if (token) {
-    console.log("getAuthToken: Token preview:", `${token.substring(0, 30)}...`);
-  }
   return token;
 }
 

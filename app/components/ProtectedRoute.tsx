@@ -22,17 +22,14 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   useEffect(() => {
     const verifyAuth = async () => {
       const token = getAuthToken();
-      console.log("ProtectedRoute: Token found:", !!token);
 
       if (!token) {
-        console.log("ProtectedRoute: No token found, redirecting to login");
         setIsLoading(false);
         router.push("/login");
         return;
       }
 
       try {
-        console.log("ProtectedRoute: Verifying token with API");
         const response = await fetch("/api/auth/verify", {
           method: "GET",
           headers: {
@@ -40,21 +37,16 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
           },
         });
 
-        console.log("ProtectedRoute: API response status:", response.status);
-
         if (response.ok) {
           const data = await response.json();
-          console.log("ProtectedRoute: User verified:", data.user);
           setUser(data.user);
           setIsLoading(false);
         } else {
           const errorData = await response.json();
-          console.log("ProtectedRoute: Auth failed:", errorData);
           setIsLoading(false);
           router.push("/login");
         }
       } catch (error) {
-        console.error("Auth verification failed:", error);
         setIsLoading(false);
         router.push("/login");
       }

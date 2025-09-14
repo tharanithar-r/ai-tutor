@@ -34,7 +34,6 @@ export default function ChatPage() {
       try {
         const token = getAuthToken();
         if (!token) {
-          console.log("No auth token found");
           return;
         }
 
@@ -45,14 +44,12 @@ export default function ChatPage() {
         });
 
         const data = await response.json();
-        console.log("Goals API response:", data);
 
         if (data.success && Array.isArray(data.data)) {
           setGoals(data.data);
         } else if (Array.isArray(data.goals)) {
           setGoals(data.goals);
         } else {
-          console.warn("Unexpected goals API response structure:", data);
           setGoals([]);
         }
       } catch (error) {

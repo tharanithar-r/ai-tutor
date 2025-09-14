@@ -74,11 +74,7 @@ export default function AuthForm({ type, onSubmit, isLoading = false }: AuthForm
         : { email: email.trim(), password };
       
       await onSubmit(credentials);
-      
-      console.log(`${type === 'login' ? 'Login' : 'Registration'} successful!`);
     } catch (error: unknown) {
-      console.error(`${type === 'login' ? 'Login' : 'Registration'} error:`, error);
-
       let errorMessage = 'An unexpected error occurred. Please try again.';
 
       if (error instanceof Error) {

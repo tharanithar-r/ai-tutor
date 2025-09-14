@@ -62,11 +62,6 @@ export default function ChatInterface({
   // Initialize Socket.io connection
   useEffect(() => {
     const token = getAuthToken();
-    console.log("ChatInterface: Token retrieved:", !!token);
-    console.log(
-      "ChatInterface: Token preview:",
-      token ? `${token.substring(0, 30)}...` : "null"
-    );
 
     if (!token) {
       setError("Authentication required. Please log in.");
@@ -74,7 +69,6 @@ export default function ChatInterface({
       return;
     }
 
-    console.log("ChatInterface: Connecting to Socket.io with token");
     const socketInstance = io(
       process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3001",
       {
@@ -89,7 +83,6 @@ export default function ChatInterface({
 
     // Connection event handlers
     socketInstance.on("connect", () => {
-      console.log("Connected to chat server");
       setIsConnected(true);
       setError(null);
       setIsLoading(false);
@@ -102,12 +95,10 @@ export default function ChatInterface({
     });
 
     socketInstance.on("disconnect", () => {
-      console.log("Disconnected from chat server");
       setIsConnected(false);
     });
 
     socketInstance.on("connect_error", (error) => {
-      console.error("Connection error:", error);
       setError("Failed to connect to chat server");
       setIsConnected(false);
       setIsLoading(false);
@@ -198,7 +189,6 @@ export default function ChatInterface({
       "user_typing",
       (data: { userId: string; isTyping: boolean }) => {
         // Handle other users typing (for future multi-user support)
-        console.log('User typing:', data);
       }
     );
 
